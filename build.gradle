@@ -1,0 +1,46 @@
+plugins {
+
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'war'
+	id "org.sonarqube" version "2.7.1"
+}
+
+
+sonarqube {
+  properties {
+    property 'sonar.projectKey', 'elijanajonuzi_Spring-Boot'
+  }
+}
+
+group = 'ch.noseryoung.plj'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	 jcenter()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+   	compile 'org.postgresql:postgresql'
+// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    
+    
+    compile 'org.springframework.boot:spring-boot-starter-mail' 
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    //email
+   // implement 'com.sendgrid:sendgrid-java:4.0.1'
+}
