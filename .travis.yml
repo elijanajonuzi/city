@@ -1,0 +1,10 @@
+language: java
+
+addons:
+  sonarcloud:
+    organization: "elijanajonuzi"
+    token:
+      secure: "ca11effa27483bbdbc902b7f3e6c903b10fb8065" # encrypted value of your token
+
+script:
+  - ./gradlew sonarqube
