@@ -1,4 +1,6 @@
 language: java
+sudo: false
+install: true
 
 addons:
   sonarcloud:
@@ -6,23 +8,19 @@ addons:
     token:
       secure: "ca11effa27483bbdbc902b7f3e6c903b10fb8065" # encrypted value of your token
 
-
-
-
-script:
-  - ./gradlew sonarqube
-
- notifications:
+notifications:
   slack:
-  rooms:
-    noseryoungpro-fpp6320:F8Zk99pqamIEpDZgY4CTQ2rH
-   on_success: always
-   on_failure: always
-   use_notice: true
+    rooms:
+    - noseryoungpro-fpp6320:3Ojv3kbMr7yTNRZaxnwds5db#backend
     template:
-      - "%{repository_slug}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
-      - "Change view : %{compare_url}"
-      - "Build details : %{build_url}"
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
+      - "Execution time: *%{duration}*"
+      - "Message: %{message}"
 
+jdk:
+  - openjdk11
   
- 
+ script:
+  - ./gradlew sonarqube
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
