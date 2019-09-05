@@ -6,11 +6,18 @@ addons:
     token:
       secure: "ca11effa27483bbdbc902b7f3e6c903b10fb8065" # encrypted value of your token
 
-script:
-  - ./gradlew sonarqube
-  
-  notifications:
+ notifications:
   slack: noseryoungpro-fpp6320:F8Zk99pqamIEpDZgY4CTQ2rH
    on_success: always
    on_failure: always
-   
+   use_notice: true
+    template:
+      - "%{repository_slug}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+      - "Change view : %{compare_url}"
+      - "Build details : %{build_url}"
+
+
+script:
+  - ./gradlew sonarqube
+  
+ 
