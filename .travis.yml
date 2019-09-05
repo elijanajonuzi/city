@@ -8,19 +8,5 @@ addons:
     token:
       secure: "ca11effa27483bbdbc902b7f3e6c903b10fb8065" # encrypted value of your token
 
-notifications:
-  slack:
-    rooms:
-    - noseryoungpro-fpp6320:3Ojv3kbMr7yTNRZaxnwds5db#backend
-    template:
-      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
-      - "Execution time: *%{duration}*"
-      - "Message: %{message}"
-
 jdk:
   - openjdk11
-  
- script:
-  - ./gradlew sonarqube
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
