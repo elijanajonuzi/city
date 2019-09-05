@@ -6,6 +6,12 @@ addons:
     token:
       secure: "ca11effa27483bbdbc902b7f3e6c903b10fb8065" # encrypted value of your token
 
+
+
+
+script:
+  - ./gradlew sonarqube
+
  notifications:
   slack:
   rooms:
@@ -18,8 +24,5 @@ addons:
       - "Change view : %{compare_url}"
       - "Build details : %{build_url}"
 
-
-script:
-  - ./gradlew sonarqube
   
  
