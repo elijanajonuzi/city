@@ -8,3 +8,9 @@ addons:
 
 script:
   - ./gradlew sonarqube
+  
+  notifications:
+  slack: noseryoungpro-fpp6320:F8Zk99pqamIEpDZgY4CTQ2rH
+   on_success: always
+   on_failure: always
+   
