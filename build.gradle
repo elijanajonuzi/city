@@ -37,10 +37,11 @@ dependencies {
     
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-    
+    compile group: 'org.mockito', name: 'mockito-core', version: '2.13.0'
     
     compile 'org.springframework.boot:spring-boot-starter-mail' 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    
+testCompile('org.springframework.boot:spring-boot-starter-test')
     //email
    // implement 'com.sendgrid:sendgrid-java:4.0.1'
 }
