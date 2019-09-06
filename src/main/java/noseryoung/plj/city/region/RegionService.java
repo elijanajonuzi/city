@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service 
-public class RegionService {
+public class RegionService{
 
 	private Region region=new Region();
 	
@@ -23,19 +23,14 @@ public class RegionService {
 	@Autowired
 	public RegionService(CityRepository cityrepository) {
 		this.cityrepository=cityrepository;
-		
-	}
-	
-	
-	
-	public RegionService() {
 	}
 
-	public RegionService(Region region) {
-		super();
-		this.region = region;
-		
+	
+	public City getCityName(String name) {
+		return cityrepository.findByName(name);
 	}
+	
+	
 	
 	protected void addCity(City city) {
 	long id= city.getId();
@@ -45,7 +40,7 @@ public class RegionService {
 	cityrepository.save(newCity);
 	}
 	
-	protected void deleteCity(long id) {
+	public void deleteCity(long id) {
 		cityrepository.deleteById(id);
 	}
 	
@@ -59,7 +54,7 @@ public class RegionService {
 	protected Optional<City> getCityNameById(long id) {
 		return cityrepository.findById(id);
 	}
-	protected List<City> getAllCities(){
+	public List<City> getAllCities(){
 		return cityrepository.findAll();
 	}
 	protected List<City> getAllCitiesInRegion(long id){
@@ -72,7 +67,7 @@ public class RegionService {
 	protected List<City> gettAllCitiesByPopulation(int population){
 		return  cityrepository.selectCityWithPopulation(population);
 	}
-	protected List<City> getAllCitiesWithRegion(){
+	public List<City> getAllCitiesWithRegion(){
 		return cityrepository.findAll();
 	}
 	
@@ -91,4 +86,8 @@ protected void updateCity(long idToChange,City city) {
 	public void setRegion(Region region) {
 		this.region = region;
 	}
+
+
+
+	
 }

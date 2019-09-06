@@ -25,9 +25,7 @@ public interface CityRepository extends JpaRepository<City, Long> {
 	@Query(value="select * from city join region on region_id=id where region_id=?1",nativeQuery=true)
 	public List<City> selectCityWithRegionID(long idToList);
 	
-
-
 	
-
+	public City findByName(String name);
 	
 }

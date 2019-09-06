@@ -2,15 +2,10 @@ package noseryoung.plj.city.region;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -32,7 +27,7 @@ public class City {
 	@Column(name="population")
 	private int population;
 	
-	 @ManyToOne(
+	/* @ManyToOne(
 	          fetch = FetchType.EAGER,
 	          optional = false
 	  )
@@ -42,11 +37,20 @@ public class City {
 	  )
 	 @JsonIgnore
 	private Region region;
-	
+	*/
 	public City() {
 	}
+	public City(long id, String name) {
+		super();
+		this.id_city = id;
+		this.name = name;
+	}
 	
-	
+	public City(String name, int population) {
+		super();
+		this.name = name;
+		this.population = population;
+	}
 
 	public City(long id, String name, int population) {
 		super();

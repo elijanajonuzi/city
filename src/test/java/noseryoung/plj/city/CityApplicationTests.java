@@ -1,32 +1,55 @@
 package noseryoung.plj.city;
 
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import noseryoung.plj.city.region.RegionController;
-import noseryoung.plj.city.region.RegionService;
+import noseryoung.plj.city.region.City;
+import noseryoung.plj.city.region.CityRepository;
 
 
-@SpringBootTest
-@ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
 public class CityApplicationTests {
-	
-	@Test
-	public void testRegionController() {
-		RegionService regionservice=new RegionService();
-		RegionController regionController = new RegionController(regionservice);
-	
-		ResponseEntity<String> itis= regionController.getCityName(1);
-		assertEquals(itis, "london");
-	}
-	
-	
+	 
+	   @Autowired
+	    private TestEntityManager entityManager;
+	   
+	   @Autowired 
+	   private CityRepository cityRepository;
+	   
+	   @Test
+	   public void whenFindByName_thenReturnCity() {
+		   //given
+		  
+		   City newYork = new City("New York", 324545);
+		   entityManager.persist(newYork);
+		   entityManager.flush();
+		   
+		   //when
+		   City gound = cityRepository.findByName(newYork.getName());
+		   
+		   //then
+		   assertEquals(newYork.getName(),gound.getName());
+		   
+		   
+		   
+		   
+				  
+		   
+		   
+		   
+	   }
+    	
+    	
+    	
 
 }
